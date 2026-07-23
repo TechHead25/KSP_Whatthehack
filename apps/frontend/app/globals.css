@@ -1,0 +1,333 @@
+/* ============================================================
+   NETRA AI — Global CSS & Design Tokens
+   Source: UI_DESIGN_SYSTEM.md §2–§4
+   DO NOT modify design tokens without user instruction
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── CSS Custom Properties ─────────────────────────────────── */
+:root {
+  /* Background layers */
+  --color-bg-base:        #050A14;
+  --color-bg-surface:     #0A1628;
+  --color-bg-elevated:    #0F1F3D;
+  --color-bg-overlay:     #162845;
+  --color-bg-glass:       rgba(15, 31, 61, 0.6);
+
+  /* Borders */
+  --color-border-subtle:  rgba(56, 97, 170, 0.20);
+  --color-border-default: rgba(56, 97, 170, 0.35);
+  --color-border-strong:  rgba(56, 97, 170, 0.60);
+
+  /* Text */
+  --color-text-primary:   #E8EDF7;
+  --color-text-secondary: #8FA8CC;
+  --color-text-tertiary:  #4A6A99;
+
+  /* Brand */
+  --color-brand:          #3B82F6;
+  --color-accent-cyan:    #06B6D4;
+
+  /* Motion */
+  --motion-quick:   300ms;
+  --motion-normal:  500ms;
+  --motion-enter:   cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-exit:    cubic-bezier(0.4, 0, 1, 1);
+
+  /* Layout */
+  --sidebar-width:         240px;
+  --sidebar-collapsed-w:   64px;
+  --topbar-height:         64px;
+  --context-panel-width:   360px;
+}
+
+/* ── Base Reset ─────────────────────────────────────────────── */
+@layer base {
+  * {
+    @apply border-border-default;
+    box-sizing: border-box;
+  }
+
+  html {
+    @apply scroll-smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--color-bg-base);
+    color: var(--color-text-primary);
+    font-family: 'Inter', 'IBM Plex Sans', system-ui, sans-serif;
+    @apply text-body-lg;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Selection */
+  ::selection {
+    background-color: rgba(59, 130, 246, 0.3);
+    color: #E8EDF7;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg-surface);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border-strong);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(56, 97, 170, 0.8);
+  }
+
+  /* Focus */
+  :focus-visible {
+    outline: 2px solid var(--color-accent-cyan);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--color-text-primary);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  p {
+    color: var(--color-text-secondary);
+  }
+
+  a {
+    color: var(--color-brand);
+    @apply transition-colors duration-150;
+  }
+  a:hover {
+    color: #93C5FD;
+  }
+
+  code, pre {
+    font-family: 'IBM Plex Mono', monospace;
+  }
+}
+
+/* ── Component Classes ─────────────────────────────────────── */
+@layer components {
+
+  /* Glass card — primary UI surface */
+  .glass-card {
+    background: var(--color-bg-glass);
+    backdrop-filter: blur(16px) saturate(1.4);
+    -webkit-backdrop-filter: blur(16px) saturate(1.4);
+    border: 1px solid var(--color-border-default);
+    border-radius: 0.75rem;
+    box-shadow:
+      0 8px 32px rgba(0,0,0,0.4),
+      inset 0 1px 0 rgba(255,255,255,0.05),
+      inset 0 0 0 0.5px rgba(255,255,255,0.03);
+    transition: box-shadow var(--motion-quick) var(--motion-enter),
+                border-color var(--motion-quick) var(--motion-enter),
+                transform var(--motion-quick) var(--motion-enter);
+  }
+  .glass-card:hover {
+    border-color: var(--color-border-strong);
+    box-shadow:
+      0 16px 48px rgba(0,0,0,0.5),
+      inset 0 1px 0 rgba(255,255,255,0.07),
+      inset 0 0 0 0.5px rgba(255,255,255,0.05);
+  }
+
+  /* Surface card — solid elevated surface */
+  .surface-card {
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 0.75rem;
+  }
+
+  /* Elevated card */
+  .elevated-card {
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border-default);
+    border-radius: 0.75rem;
+  }
+
+  /* Risk badge base */
+  .risk-badge {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-body-sm font-medium border;
+  }
+  .risk-badge-critical {
+    @apply risk-badge bg-red-500/15 text-red-300 border-red-500/30 animate-pulse-ring;
+  }
+  .risk-badge-high {
+    @apply risk-badge bg-orange-500/15 text-orange-300 border-orange-500/30;
+  }
+  .risk-badge-medium {
+    @apply risk-badge bg-yellow-500/15 text-yellow-300 border-yellow-500/30;
+  }
+  .risk-badge-low {
+    @apply risk-badge bg-green-500/15 text-green-300 border-green-500/30;
+  }
+
+  /* Primary button */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg
+           bg-brand-600 hover:bg-brand-500 text-white text-body-md font-semibold
+           transition-all duration-200 focus-visible:ring-2 focus-visible:ring-accent-cyan
+           disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.97];
+    box-shadow: 0 0 16px rgba(59,130,246,0.3), 0 2px 8px rgba(0,0,0,0.3);
+  }
+  .btn-primary:hover {
+    box-shadow: 0 0 24px rgba(59,130,246,0.45), 0 4px 12px rgba(0,0,0,0.4);
+    transform: translateY(-1px);
+  }
+
+  /* Ghost button */
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg
+           text-text-secondary hover:text-text-primary hover:bg-bg-elevated
+           text-body-md font-medium transition-all duration-200
+           disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.97];
+  }
+
+  /* Input field */
+  .input-field {
+    @apply w-full px-3.5 py-2.5 rounded-lg
+           bg-bg-surface border border-border-default
+           text-text-primary text-body-md placeholder:text-text-tertiary
+           focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30
+           transition-all duration-200;
+  }
+
+  /* Nav item */
+  .nav-item {
+    @apply flex items-center gap-3 px-3 py-2.5 rounded-lg text-body-md
+           text-text-secondary transition-all duration-200 cursor-pointer select-none;
+  }
+  .nav-item:hover {
+    @apply text-text-primary bg-bg-elevated;
+  }
+  .nav-item-active {
+    @apply text-brand-400 bg-brand-500/10 border border-brand-500/20;
+  }
+  .nav-item-active svg {
+    @apply text-brand-400;
+  }
+
+  /* Shimmer loading effect */
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      var(--color-bg-elevated) 25%,
+      rgba(56, 97, 170, 0.15) 50%,
+      var(--color-bg-elevated) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s linear infinite;
+  }
+
+  /* NETRA logo text */
+  .netra-logo {
+    background: linear-gradient(135deg, #3B82F6 0%, #06B6D4 50%, #8B5CF6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Section header */
+  .section-header {
+    @apply flex items-center gap-2.5 mb-5;
+  }
+  .section-icon {
+    @apply w-8 h-8 rounded-lg flex items-center justify-center border;
+  }
+}
+
+/* ── Keyframes ──────────────────────────────────────────────── */
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes scan-line {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes breathe {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+@keyframes grid-pulse {
+  0%, 100% { opacity: 0.02; }
+  50% { opacity: 0.06; }
+}
+
+/* ── Utility overrides ──────────────────────────────────────── */
+@layer utilities {
+  .text-gradient-brand {
+    background: linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-gold {
+    background: linear-gradient(135deg, #F59E0B 0%, #EF4444 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .border-glass {
+    border: 1px solid var(--color-border-default);
+  }
+
+  .bg-glass {
+    background: var(--color-bg-glass);
+    backdrop-filter: blur(16px) saturate(1.4);
+    -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  }
+
+  .glow-brand {
+    box-shadow: 0 0 24px rgba(59, 130, 246, 0.4);
+  }
+
+  .glow-cyan {
+    box-shadow: 0 0 24px rgba(6, 182, 212, 0.4);
+  }
+
+  .glow-red {
+    box-shadow: 0 0 24px rgba(239, 68, 68, 0.3);
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-breathe {
+    animation: breathe 4s ease-in-out infinite;
+  }
+
+  .animate-grid-pulse {
+    animation: grid-pulse 4s ease-in-out infinite;
+  }
+
+  .animate-scan-line {
+    animation: scan-line 4s linear infinite;
+  }
+}

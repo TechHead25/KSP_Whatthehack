@@ -1,0 +1,45 @@
+{
+  "name": "netra-ai",
+  "version": "0.1.0",
+  "private": true,
+  "description": "NETRA AI — Network Enhanced Threat Recognition & Analysis | Karnataka State Police Crime Intelligence Platform",
+  "license": "UNLICENSED",
+  "packageManager": "pnpm@9.0.0",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
+    "dev:frontend": "turbo run dev --filter=@netra/frontend",
+    "dev:backend": "turbo run dev --filter=@netra/backend",
+    "build:frontend": "turbo run build --filter=@netra/frontend",
+    "seed:db": "node scripts/seed/index.js",
+    "migrate:up": "python scripts/migrations/run.py up",
+    "migrate:down": "python scripts/migrations/run.py down"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "devDependencies": {
+    "turbo": "^2.0.0",
+    "prettier": "^3.3.0",
+    "typescript": "^5.4.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint": "^8.57.0",
+    "husky": "^9.0.0",
+    "lint-staged": "^15.0.0"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": ["eslint --fix", "prettier --write"],
+    "*.{md,json,yml,yaml}": ["prettier --write"],
+    "*.py": ["black --check", "ruff check"]
+  }
+}

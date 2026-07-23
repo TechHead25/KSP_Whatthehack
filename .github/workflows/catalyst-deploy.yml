@@ -1,0 +1,29 @@
+name: Deploy to Zoho Catalyst
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js (Required for Catalyst CLI)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Catalyst CLI
+        run: npm install -g zcatalyst-cli
+
+      - name: Deploy to Catalyst AppSail
+        env:
+          CATALYST_TOKEN: ${{ secrets.CATALYST_DEPLOY_TOKEN }}
+          CATALYST_PROJECT: ${{ secrets.CATALYST_PROJECT_ID }}
+        run: |
+          catalyst deploy --token $CATALYST_TOKEN --project $CATALYST_PROJECT

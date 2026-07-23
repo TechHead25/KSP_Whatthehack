@@ -1,0 +1,13 @@
+{
+  "appsails": [
+    {
+      "name": "netra-api",
+      "source": "apps/backend"
+    },
+    {
+      "name": "netra-frontend",
+      "source": "apps/frontend",
+      "type": "client"
+    }
+  ]
+}
