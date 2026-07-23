@@ -94,7 +94,7 @@ export default function DigitalTwinPage() {
       {filtered.length === 0 && (
         <div className="py-12 text-center text-text-tertiary bg-bg-elevated border border-border-default rounded-xl border-dashed">
           <Users className="w-8 h-8 mx-auto mb-3 opacity-20" />
-          <p className="text-sm">No profiles found matching "{search}"</p>
+          <p className="text-sm">No profiles found matching &quot;{search}&quot;</p>
         </div>
       )}
     </div>

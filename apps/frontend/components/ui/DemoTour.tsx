@@ -56,7 +56,7 @@ export function DemoTour() {
 
   const handleJoyrideCallback = (data: CallBackProps) => {
     const { status } = data
-    if ([STATUS.FINISHED, STATUS.SKIPPED].includes(status)) {
+    if (status === STATUS.FINISHED || status === STATUS.SKIPPED) {
       setRun(false)
       localStorage.setItem('netra_tour_seen', 'true')
     }

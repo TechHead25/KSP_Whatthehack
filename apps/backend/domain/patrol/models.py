@@ -1,7 +1,7 @@
 from sqlalchemy import Column, String, ForeignKey, DateTime
 from sqlalchemy.dialects.postgresql import JSONB
 
-from ...core.models import Base, UUIDMixin, TimestampMixin
+from core.models import Base, UUIDMixin, TimestampMixin
 
 class PatrolSchedule(Base, UUIDMixin, TimestampMixin):
     __tablename__ = "patrol_schedules"

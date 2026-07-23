@@ -10,15 +10,15 @@ from typing import Any
 
 import pyotp
 
-from ...core.config import get_settings
-from ...core.exceptions import (
+from core.config import get_settings
+from core.exceptions import (
     AccountLockedException,
     InvalidCredentialsException,
     MFAInvalidException,
     OfficerNotFoundException,
     TokenExpiredException,
 )
-from ...core.security import (
+from core.security import (
     create_access_token,
     create_refresh_token,
     create_temp_token,
@@ -108,7 +108,7 @@ DEMO_OFFICERS: dict[str, dict[str, Any]] = {
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from sqlalchemy import func
-from ..shared.models import Officer, Station, District, LoginAttempt, Session
+from domain.shared.models import Officer, Station, District, LoginAttempt, Session
 
 # Role → permissions mapping (mirrors packages/config/roles.config.ts)
 ROLE_PERMISSIONS: dict[str, list[str]] = {

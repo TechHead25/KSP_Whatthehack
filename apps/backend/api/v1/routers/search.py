@@ -2,10 +2,10 @@ import uuid
 from fastapi import APIRouter, Depends, Query
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from ....infrastructure.database.catalyst import get_db
-from ....core.responses import SuccessResponse
-from ....domain.search.schemas import GlobalSearchRequest, GlobalSearchResponse, AutocompleteResponse
-from ....domain.search.service import search_service
+from infrastructure.database.catalyst import get_db
+from core.responses import SuccessResponse
+from domain.search.schemas import GlobalSearchRequest, GlobalSearchResponse, AutocompleteResponse
+from domain.search.service import search_service
 
 router = APIRouter(prefix="/search", tags=["Enterprise Search"])
 

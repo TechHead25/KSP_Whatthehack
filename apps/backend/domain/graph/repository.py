@@ -1,7 +1,7 @@
 import structlog
 from typing import List, Dict, Any
 
-from ...infrastructure.database.neo4j import neo4j_manager
+from infrastructure.database.neo4j import neo4j_manager
 
 log = structlog.get_logger()
 

@@ -1,7 +1,7 @@
 from sqlalchemy import Column, String, Boolean
 from sqlalchemy.dialects.postgresql import JSONB
 
-from ...core.models import Base, UUIDMixin, TimestampMixin
+from core.models import Base, UUIDMixin, TimestampMixin
 
 class Role(Base, UUIDMixin, TimestampMixin):
     __tablename__ = "roles"

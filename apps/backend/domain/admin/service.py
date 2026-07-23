@@ -39,7 +39,7 @@ class AdminService:
 
     async def get_active_sessions(self, db) -> List[Any]:
         from sqlalchemy import select
-        from ..shared.models import Session
+        from domain.shared.models import Session
         result = await db.execute(
             select(Session)
             .where(Session.is_active == True)
@@ -50,7 +50,7 @@ class AdminService:
 
     async def get_audit_logs(self, db) -> List[Any]:
         from sqlalchemy import select
-        from ..shared.models import AuditLog
+        from domain.shared.models import AuditLog
         result = await db.execute(
             select(AuditLog)
             .order_by(AuditLog.created_at.desc())

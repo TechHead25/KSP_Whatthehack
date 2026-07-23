@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from ....infrastructure.database.catalyst import get_db
-from ....core.responses import SuccessResponse
-from ....domain.analytics.schemas import AnalyticsDashboardResponse
-from ....domain.analytics.service import analytics_service
+from infrastructure.database.catalyst import get_db
+from core.responses import SuccessResponse
+from domain.analytics.schemas import AnalyticsDashboardResponse
+from domain.analytics.service import analytics_service
 
 router = APIRouter(prefix="/analytics", tags=["Crime Analytics"])
 

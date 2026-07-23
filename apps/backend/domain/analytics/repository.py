@@ -3,9 +3,9 @@ from typing import List, Dict, Any
 from sqlalchemy import select, func, desc
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from ..fir.models import FIR
-from ..shared.models import Officer, District
-from ..suspects.models import Suspect
+from domain.fir.models import FIR
+from domain.shared.models import Officer, District
+from domain.suspects.models import Suspect
 
 log = structlog.get_logger()
 

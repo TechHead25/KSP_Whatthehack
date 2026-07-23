@@ -6,7 +6,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from .schemas import NotificationTriggerRequest, AlertType, NotificationChannel
 from .models import NotificationHistory
-from ..shared.models import Officer
+from domain.shared.models import Officer
 
 log = structlog.get_logger()
 

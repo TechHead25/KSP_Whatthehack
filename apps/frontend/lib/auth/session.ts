@@ -4,27 +4,39 @@ export const AUTH_SESSION_COOKIE = 'netra-session'
 export const AUTH_ROLE_COOKIE = 'netra-role'
 export const AUTH_SESSION_TTL_MS = 15 * 60 * 1000
 
+/** Whitelisted public page paths per Phase 4 requirements */
 export const PUBLIC_PATHS = [
   '/',
   '/login',
   '/signup',
   '/forgot-password',
   '/reset-password',
-  '/mfa',
-  '/forbidden',
-  '/_next',
-  '/favicon.ico',
-  '/api',
 ]
+
+/** Top-level route aliases mapped to dashboard subroutes */
+export const TOP_LEVEL_ROUTE_MAP: Record<string, string> = {
+  '/admin': '/dashboard/admin',
+  '/reports': '/dashboard/reports',
+  '/analytics': '/dashboard/analytics',
+  '/users': '/dashboard/admin',
+  '/settings': '/dashboard/settings',
+  '/intelligence': '/dashboard/digital-twin',
+  '/incidents': '/dashboard/fir',
+  '/evidence': '/dashboard/evidence',
+  '/patrol': '/dashboard/patrol',
+  '/heatmap': '/dashboard/heatmap',
+  '/graph': '/dashboard/criminal-network',
+  '/audit': '/dashboard/audit',
+}
 
 const ROLE_PROTECTED_PREFIXES: Array<{ prefix: string; allowedRoles: Role[] }> = [
   { prefix: '/dashboard/admin', allowedRoles: ['SUPER_ADMIN'] },
   { prefix: '/dashboard/users', allowedRoles: ['SUPER_ADMIN', 'STATE_ADMIN', 'DISTRICT_ADMIN'] },
   { prefix: '/dashboard/settings', allowedRoles: ['SUPER_ADMIN', 'STATE_ADMIN', 'DISTRICT_ADMIN', 'INVESTIGATION_OFFICER', 'POLICE_OFFICER'] },
-  { prefix: '/dashboard/reports', allowedRoles: ['SUPER_ADMIN', 'STATE_ADMIN', 'DISTRICT_ADMIN', 'INVESTIGATION_OFFICER', 'AUDITOR'] },
-  { prefix: '/dashboard/analytics', allowedRoles: ['SUPER_ADMIN', 'STATE_ADMIN', 'DISTRICT_ADMIN', 'INVESTIGATION_OFFICER', 'AUDITOR'] },
-  { prefix: '/dashboard/intelligence', allowedRoles: ['SUPER_ADMIN', 'STATE_ADMIN', 'DISTRICT_ADMIN', 'INVESTIGATION_OFFICER'] },
-  { prefix: '/dashboard/incidents', allowedRoles: ['SUPER_ADMIN', 'STATE_ADMIN', 'DISTRICT_ADMIN', 'INVESTIGATION_OFFICER'] },
+  { prefix: '/dashboard/reports', allowedRoles: ['SUPER_ADMIN', 'STATE_ADMIN', 'DISTRICT_ADMIN', 'INVESTIGATION_OFFICER', 'AUDITOR', 'COMMISSIONER'] },
+  { prefix: '/dashboard/analytics', allowedRoles: ['SUPER_ADMIN', 'STATE_ADMIN', 'DISTRICT_ADMIN', 'INVESTIGATION_OFFICER', 'AUDITOR', 'COMMISSIONER'] },
+  { prefix: '/dashboard/intelligence', allowedRoles: ['SUPER_ADMIN', 'STATE_ADMIN', 'DISTRICT_ADMIN', 'INVESTIGATION_OFFICER', 'COMMISSIONER'] },
+  { prefix: '/dashboard/incidents', allowedRoles: ['SUPER_ADMIN', 'STATE_ADMIN', 'DISTRICT_ADMIN', 'INVESTIGATION_OFFICER', 'POLICE_OFFICER'] },
   { prefix: '/dashboard/evidence', allowedRoles: ['SUPER_ADMIN', 'STATE_ADMIN', 'DISTRICT_ADMIN', 'INVESTIGATION_OFFICER', 'READ_ONLY_OFFICER'] },
   { prefix: '/dashboard/suspects', allowedRoles: ['SUPER_ADMIN', 'STATE_ADMIN', 'DISTRICT_ADMIN', 'INVESTIGATION_OFFICER'] },
   { prefix: '/dashboard/graph', allowedRoles: ['SUPER_ADMIN', 'STATE_ADMIN', 'DISTRICT_ADMIN', 'INVESTIGATION_OFFICER', 'AUDITOR'] },
@@ -38,7 +50,7 @@ export function isPublicPath(pathname: string): boolean {
     return true
   }
 
-  return PUBLIC_PATHS.some((publicPath) => pathname === publicPath || pathname.startsWith(`${publicPath}/`))
+  return PUBLIC_PATHS.some((publicPath) => pathname === publicPath || (publicPath !== '/' && pathname.startsWith(`${publicPath}/`)))
 }
 
 export function isRoleProtectedPath(pathname: string): boolean {

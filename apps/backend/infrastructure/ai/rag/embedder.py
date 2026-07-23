@@ -1,7 +1,7 @@
 import os
 from typing import List
 import structlog
-from ....core.config import get_settings
+from core.config import get_settings
 
 # Try to import Langchain Google GenAI
 try:

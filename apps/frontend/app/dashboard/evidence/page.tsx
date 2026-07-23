@@ -90,6 +90,7 @@ export default function EvidencePage() {
             <div key={ev.id} className="bg-bg-elevated border border-border-default rounded-xl overflow-hidden hover:border-brand-500/50 transition-all shadow-card group cursor-pointer flex flex-col">
               <div className="h-40 bg-bg-surface/50 flex items-center justify-center border-b border-border-subtle relative group-hover:bg-bg-surface transition-colors overflow-hidden">
                 {ev.type === 'image' && ev.url ? (
+                  /* eslint-disable-next-line @next/next/no-img-element */
                   <img src={ev.url} alt={ev.name} className="w-full h-full object-cover" />
                 ) : ev.type === 'video' && ev.url ? (
                   <video src={ev.url} className="w-full h-full object-cover" controls={false} muted loop onMouseEnter={(e) => e.currentTarget.play()} onMouseLeave={(e) => e.currentTarget.pause()} />
@@ -163,7 +164,7 @@ export default function EvidencePage() {
       {filtered.length === 0 && (
         <div className="py-12 text-center text-text-tertiary bg-bg-elevated border border-border-default rounded-xl border-dashed">
           <Search className="w-8 h-8 mx-auto mb-3 opacity-20" />
-          <p className="text-sm">No evidence found matching "{search}"</p>
+          <p className="text-sm">No evidence found matching &quot;{search}&quot;</p>
         </div>
       )}
     </div>

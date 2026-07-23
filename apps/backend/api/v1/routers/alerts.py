@@ -3,10 +3,10 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import List
 
-from ....infrastructure.database.catalyst import get_db
-from ....core.responses import SuccessResponse
-from ....domain.alerts.schemas import NotificationHistoryResponse, NotificationTriggerRequest
-from ....domain.alerts.service import alert_dispatcher
+from infrastructure.database.catalyst import get_db
+from core.responses import SuccessResponse
+from domain.alerts.schemas import NotificationHistoryResponse, NotificationTriggerRequest
+from domain.alerts.service import alert_dispatcher
 
 router = APIRouter(prefix="/alerts", tags=["Early Warning System"])
 

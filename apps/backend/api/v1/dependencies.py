@@ -6,11 +6,11 @@ from fastapi import Depends, HTTPException, Request
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from jose import JWTError
 
-from ...core.exceptions import (
+from core.exceptions import (
     InsufficientPermissionsException,
     TokenExpiredException,
 )
-from ...core.security import decode_token
+from core.security import decode_token
 
 bearer_scheme = HTTPBearer(auto_error=False)
 

@@ -5,7 +5,7 @@ from sqlalchemy import select, and_, or_, func
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
-from ...core.repository import BaseRepository
+from core.repository import BaseRepository
 from .models import FIR
 from .schemas import FIRCreate, FIRUpdate, FIRFilterParams
 

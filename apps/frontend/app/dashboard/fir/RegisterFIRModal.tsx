@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import axios from 'axios'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, FileText, Loader2, ShieldAlert } from 'lucide-react'
 import { createFIR, FIRCreatePayload } from '@/lib/api/firApi'
@@ -37,8 +38,15 @@ export function RegisterFIRModal({ isOpen, onClose, onSuccess }: Props) {
       await createFIR(formData)
       onSuccess()
       onClose()
-    } catch (err: any) {
-      setError(err.response?.data?.error?.message || 'Failed to create FIR')
+    } catch (err: unknown) {
+      if (axios.isAxiosError(err)) {
+        const msg = (err.response?.data as { error?: { message?: string } })?.error?.message
+        setError(msg || 'Failed to create FIR')
+      } else if (err instanceof Error) {
+        setError(err.message)
+      } else {
+        setError('Failed to create FIR')
+      }
     } finally {
       setLoading(false)
     }

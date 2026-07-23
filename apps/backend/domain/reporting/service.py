@@ -4,7 +4,7 @@ import structlog
 
 from .schemas import ReportRequest, ReportResponse, ReportMetadata
 from .generator import pdf_generator
-from ...infrastructure.storage.file_store import file_store as catalyst_storage
+from infrastructure.storage.file_store import file_store as catalyst_storage
 
 log = structlog.get_logger()
 

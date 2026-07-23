@@ -18,6 +18,8 @@ def compile_jsonb_sqlite(type_, compiler, **kw):
 def compile_array_sqlite(type_, compiler, **kw):
     return "JSON"
 
+sys.path.insert(0, os.path.abspath("apps"))
+
 from backend.core.models import Base
 from backend.domain.shared.models import District, Station, Officer
 from backend.domain.suspects.models import Suspect
@@ -76,19 +78,19 @@ def generate_ka_vehicle_plate():
     return f"KA-{rto:02d}-{chars}-{nums}"
 
 async def seed_data():
-    print("🚀 Initializing NETRA AI Demo Dataset Generation...")
+    print("[INIT] Initializing NETRA AI Demo Dataset Generation...")
     engine = create_async_engine(DB_URL, echo=False)
     
     # Create tables
     async with engine.begin() as conn:
-        print("📦 Creating database schemas...")
+        print("[INIT] Creating database schemas...")
         await conn.run_sync(Base.metadata.drop_all)
         await conn.run_sync(Base.metadata.create_all)
 
     async_session = async_sessionmaker(engine, expire_on_commit=False)
     
     async with async_session() as session:
-        print("👮 Generating Districts and Stations...")
+        print("[SEED] Generating Districts and Stations...")
         districts_db = []
         for name, code in DISTRICTS:
             d = District(name=name, code=code, region="Bengaluru", population=random.randint(500000, 2000000))
@@ -110,7 +112,7 @@ async def seed_data():
             stations_db.append(s)
         await session.commit()
 
-        print("🕵️ Generating Officers (User Accounts)...")
+        print("[SEED] Generating Officers (User Accounts)...")
         roles = ["POLICE_OFFICER", "INVESTIGATION_OFFICER", "READ_ONLY_OFFICER", "DISTRICT_ADMIN", "STATE_ADMIN"]
         officers_db = []
         
@@ -155,7 +157,7 @@ async def seed_data():
             officers_db.append(o)
         await session.commit()
 
-        print(f"🦹 Generating {NUM_CRIMINALS} Suspects/Criminals...")
+        print(f"[SEED] Generating {NUM_CRIMINALS} Suspects/Criminals...")
         suspects_db = []
         for _ in range(NUM_CRIMINALS):
             s = Suspect(
@@ -172,7 +174,7 @@ async def seed_data():
             suspects_db.append(s)
         await session.commit()
 
-        print(f"📄 Generating {NUM_FIRS} FIRs...")
+        print(f"[SEED] Generating {NUM_FIRS} FIRs...")
         firs_db = []
         start_date = datetime.now() - timedelta(days=365)
         for i in range(NUM_FIRS):
@@ -198,7 +200,7 @@ async def seed_data():
             firs_db.append(f)
         await session.commit()
         
-        print("🔗 Linking Suspects to FIRs...")
+        print("[SEED] Linking Suspects to FIRs...")
         for fir in firs_db:
             if random.random() > 0.3: # 70% of FIRs have known suspects
                 num_suspects = random.randint(1, 3)
@@ -212,7 +214,7 @@ async def seed_data():
                     session.add(fs)
         await session.commit()
 
-        print("✅ Database seeding complete.")
+        print("[DONE] Database seeding complete.")
         
     await engine.dispose()
 

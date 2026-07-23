@@ -2,10 +2,10 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import text
 
-from ....infrastructure.database.catalyst import get_db
-from ....infrastructure.database.neo4j import neo4j_manager
-from ....infrastructure.cache.redis import redis_cache
-from ....core.responses import SuccessResponse
+from infrastructure.database.catalyst import get_db
+from infrastructure.database.neo4j import neo4j_manager
+from infrastructure.cache.redis import redis_cache
+from core.responses import SuccessResponse
 
 router = APIRouter(prefix="/health", tags=["Monitoring & Health Checks"])
 

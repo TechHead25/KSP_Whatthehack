@@ -4,7 +4,7 @@ from sqlalchemy import select, update
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.dialects.postgresql import JSONB
 
-from ...core.repository import BaseRepository
+from core.repository import BaseRepository
 from .models import Evidence
 from .schemas import EvidenceCreate, EvidenceUpdate
 

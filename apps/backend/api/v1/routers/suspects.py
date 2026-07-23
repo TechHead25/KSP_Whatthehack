@@ -3,11 +3,11 @@ from typing import List, Dict, Any
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from ....infrastructure.database.catalyst import get_db
-from ....core.responses import SuccessResponse
-from ....domain.suspects.schemas import DigitalTwinProfile, SuspectCreate
-from ....domain.suspects.service import suspect_service
-from ....domain.suspects.repository import suspect_repo
+from infrastructure.database.catalyst import get_db
+from core.responses import SuccessResponse
+from domain.suspects.schemas import DigitalTwinProfile, SuspectCreate
+from domain.suspects.service import suspect_service
+from domain.suspects.repository import suspect_repo
 
 router = APIRouter(prefix="/suspects", tags=["Digital Twin (Suspects)"])
 

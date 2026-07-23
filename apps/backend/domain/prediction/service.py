@@ -3,10 +3,10 @@ import uuid
 from typing import Dict, Any
 
 from .schemas import RiskScoreResponse, HotspotResponse, HotspotPoint, AnomalyResponse, Anomaly, ForecastResponse, ForecastPoint
-from ...infrastructure.ml.risk_scorer import risk_scorer
-from ...infrastructure.ml.hotspot import hotspot_predictor
-from ...infrastructure.ml.anomaly import anomaly_detector
-from ...infrastructure.ml.forecaster import trend_forecaster
+from infrastructure.ml.risk_scorer import risk_scorer
+from infrastructure.ml.hotspot import hotspot_predictor
+from infrastructure.ml.anomaly import anomaly_detector
+from infrastructure.ml.forecaster import trend_forecaster
 
 log = structlog.get_logger()
 

@@ -5,7 +5,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from .schemas import DigitalTwinProfile, AIInsights
 from .repository import suspect_repo
-from ..graph.service import graph_service
+from domain.graph.service import graph_service
 
 log = structlog.get_logger()
 

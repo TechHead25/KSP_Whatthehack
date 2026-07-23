@@ -1,7 +1,7 @@
 from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.dialects.postgresql import JSONB
 
-from ...core.models import Base, UUIDMixin, TimestampMixin
+from core.models import Base, UUIDMixin, TimestampMixin
 
 class NotificationHistory(Base, UUIDMixin, TimestampMixin):
     __tablename__ = "notification_history"

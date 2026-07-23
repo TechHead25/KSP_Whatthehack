@@ -3,35 +3,36 @@
 # ============================================================
 from contextlib import asynccontextmanager
 from datetime import datetime, timezone
+import os
 
 import structlog
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
-import os
 
-from .api.v1.routers.auth import router as auth_router
-from .api.v1.routers.fir import router as fir_router
-from .api.v1.routers.evidence import router as evidence_router
-from .api.v1.routers.intelligence import router as intelligence_router
-from .api.v1.routers.graph import router as graph_router
-from .api.v1.routers.suspects import router as suspects_router
-from .api.v1.routers.analytics import router as analytics_router
-from .api.v1.routers.prediction import router as prediction_router
-from .api.v1.routers.patrol import router as patrol_router
-from .api.v1.routers.reporting import router as reporting_router
-from .api.v1.routers.admin import router as admin_router
-from .api.v1.routers.alerts import router as alerts_router
-from .api.v1.routers.search import router as search_router
-from .api.v1.routers.dashboard import router as dashboard_router
-from .api.v1.routers.health import router as health_router
-from .api.middleware.audit import AuditLoggingMiddleware
-from .api.middleware.rate_limit import RateLimitMiddleware
-from .infrastructure.database.neo4j import neo4j_manager
-from .infrastructure.database.redis import redis_manager
-from .core.config import get_settings
-from .core.exceptions import NETRABaseException
+from api.v1.routers.auth import router as auth_router
+from api.v1.routers.fir import router as fir_router
+from api.v1.routers.evidence import router as evidence_router
+from api.v1.routers.intelligence import router as intelligence_router
+from api.v1.routers.graph import router as graph_router
+from api.v1.routers.suspects import router as suspects_router
+from api.v1.routers.analytics import router as analytics_router
+from api.v1.routers.prediction import router as prediction_router
+from api.v1.routers.patrol import router as patrol_router
+from api.v1.routers.reporting import router as reporting_router
+from api.v1.routers.admin import router as admin_router
+from api.v1.routers.alerts import router as alerts_router
+from api.v1.routers.search import router as search_router
+from api.v1.routers.dashboard import router as dashboard_router
+from api.v1.routers.health import router as health_router
+from api.middleware.audit import AuditLoggingMiddleware
+from api.middleware.rate_limit import RateLimitMiddleware
+from infrastructure.database.neo4j import neo4j_manager
+from infrastructure.database.redis import redis_manager
+from core.config import get_settings
+from core.exceptions import NETRABaseException
+from api.v1.dependencies import get_current_officer
 
 log = structlog.get_logger()
 settings = get_settings()
@@ -40,11 +41,28 @@ settings = get_settings()
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     log.info("netra_ai_starting", version=settings.app_version, env=settings.environment)
-    await neo4j_manager.connect()
-    await redis_manager.connect()
+    try:
+        await neo4j_manager.connect()
+    except Exception as e:
+        log.warning("neo4j_connection_warning", error=str(e))
+
+    try:
+        await redis_manager.connect()
+    except Exception as e:
+        log.warning("redis_connection_warning", error=str(e))
+
     yield
-    await neo4j_manager.disconnect()
-    await redis_manager.disconnect()
+
+    try:
+        await neo4j_manager.disconnect()
+    except Exception as e:
+        log.warning("neo4j_disconnect_warning", error=str(e))
+
+    try:
+        await redis_manager.disconnect()
+    except Exception as e:
+        log.warning("redis_disconnect_warning", error=str(e))
+
     log.info("netra_ai_shutdown")
 
 
@@ -59,23 +77,29 @@ app = FastAPI(
 )
 
 # ── Static Files ─────────────────────────────────────────────
-# Ensure uploads directory exists
 uploads_dir = os.path.join(os.getcwd(), "uploads")
 os.makedirs(uploads_dir, exist_ok=True)
 app.mount("/static/uploads", StaticFiles(directory=uploads_dir), name="uploads")
 
-# ── CORS ─────────────────────────────────────────────────────
+# ── Middlewares (CORSMiddleware MUST be added LAST to execute OUTERMOST) ──────
+app.add_middleware(RateLimitMiddleware)
+app.add_middleware(AuditLoggingMiddleware)
+
+allowed_origins = list(set(settings.cors_origins + [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://localhost:3001",
+    "http://127.0.0.1:3001",
+]))
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.cors_origins,
+    allow_origins=allowed_origins,
     allow_credentials=True,
-    allow_methods=["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
-    allow_headers=["Authorization", "Content-Type", "X-Request-ID"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+    expose_headers=["*"],
 )
-
-app.add_middleware(RateLimitMiddleware)
-app.add_middleware(AuditLoggingMiddleware)
 
 # ── Exception handlers ───────────────────────────────────────
 
@@ -109,9 +133,6 @@ async def generic_exception_handler(request: Request, exc: Exception):
             "timestamp": datetime.now(timezone.utc).isoformat(),
         },
     )
-
-from .api.v1.dependencies import get_current_officer
-from fastapi import Depends
 
 # ── Routers ──────────────────────────────────────────────────
 

@@ -1,13 +1,16 @@
 {
-  "appsails": [
+  "appsail": [
     {
       "name": "netra-api",
-      "source": "apps/backend"
+      "source": "apps/backend",
+      "path": "apps/backend",
+      "buildPath": "apps/backend"
     },
     {
       "name": "netra-frontend",
       "source": "apps/frontend",
-      "type": "client"
+      "path": "apps/frontend",
+      "buildPath": "apps/frontend"
     }
   ]
 }

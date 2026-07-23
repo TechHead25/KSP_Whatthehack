@@ -2,7 +2,7 @@ from sqlalchemy import Column, String, Float, ForeignKey, Date, Text, Boolean
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import relationship
 
-from ...core.models import Base, UUIDMixin, TimestampMixin
+from core.models import Base, UUIDMixin, TimestampMixin
 
 class Suspect(Base, UUIDMixin, TimestampMixin):
     __tablename__ = "suspects"

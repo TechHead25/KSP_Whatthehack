@@ -3,7 +3,7 @@
 # ============================================================
 import structlog
 from redis import asyncio as aioredis
-from ...core.config import get_settings
+from core.config import get_settings
 
 settings = get_settings()
 log = structlog.get_logger()

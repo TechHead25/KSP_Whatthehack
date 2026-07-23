@@ -66,8 +66,20 @@ export default function CommandCenter() {
     patrolCoverage: dashboard?.widgets?.overview?.patrol_coverage_percent ?? 0,
   }
 
+  interface AlertItemInput {
+    message?: string
+    severity?: string
+    alert_type?: string
+    created_at?: string
+    time?: string
+    payload?: {
+      message?: string
+      severity?: string
+    }
+  }
+
   const alertItems = (dashboard?.widgets?.alerts?.recent_alerts ?? alertHistory ?? []).map(
-    (a: any, i: number) => ({
+    (a: AlertItemInput, i: number) => ({
       id: String(i),
       message: String(a.message ?? a.payload?.message ?? 'Alert'),
       severity: String(a.severity ?? a.payload?.severity ?? 'MEDIUM'),

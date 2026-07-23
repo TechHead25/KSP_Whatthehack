@@ -4,11 +4,11 @@ from datetime import datetime, timezone
 import structlog
 
 from sqlalchemy.ext.asyncio import AsyncSession
-from ...core.exceptions import NETRABaseException, ValidationException
+from core.exceptions import NETRABaseException, ValidationException
 from .repository import fir_repo
 from .schemas import FIRCreate, FIRUpdate, FIRFilterParams, FIRStatusUpdate, EvidenceCreate
 from .models import FIR
-from ..evidence.models import Evidence
+from domain.evidence.models import Evidence
 
 log = structlog.get_logger()
 

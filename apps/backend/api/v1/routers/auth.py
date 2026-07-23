@@ -5,9 +5,9 @@
 from fastapi import APIRouter, Depends, HTTPException, Request, Response
 from fastapi.responses import JSONResponse
 
-from ....core.exceptions import NETRABaseException
-from ....core.security import decode_token
-from ....domain.auth.schemas import (
+from core.exceptions import NETRABaseException
+from core.security import decode_token
+from domain.auth.schemas import (
     LoginRequest,
     LoginResponse,
     MFAVerifyRequest,
@@ -15,10 +15,10 @@ from ....domain.auth.schemas import (
     RefreshRequest,
     TokensOut,
 )
-from ....domain.auth.service import AuthService
+from domain.auth.service import AuthService
 
 from sqlalchemy.ext.asyncio import AsyncSession
-from ....infrastructure.database.catalyst import get_db
+from infrastructure.database.catalyst import get_db
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
 

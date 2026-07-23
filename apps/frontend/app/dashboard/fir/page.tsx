@@ -134,7 +134,7 @@ export default function FIRPage() {
                 <tr>
                   <td colSpan={7} className="px-6 py-12 text-center text-text-tertiary">
                     <FileText className="w-8 h-8 mx-auto mb-3 opacity-20" />
-                    <p className="text-xs font-medium tracking-wide">No FIRs found matching "{search}"</p>
+                    <p className="text-xs font-medium tracking-wide">No FIRs found matching &quot;{search}&quot;</p>
                   </td>
                 </tr>
               )}

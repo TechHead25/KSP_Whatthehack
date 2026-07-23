@@ -9,6 +9,7 @@ dist/
 build/
 coverage/
 *.tsbuildinfo
+.turbo/
 
 # Python
 __pycache__/
@@ -39,3 +40,5 @@ logs/
 # Uploads and local data
 uploads/*
 !uploads/.gitkeep
+*.db
+.catalystrc

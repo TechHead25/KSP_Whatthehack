@@ -5,11 +5,11 @@ from datetime import datetime, timezone
 import structlog
 
 from sqlalchemy.ext.asyncio import AsyncSession
-from ...core.exceptions import NETRABaseException
+from core.exceptions import NETRABaseException
 from .repository import evidence_repo
 from .schemas import EvidenceCreate, ChainOfCustodyEntry, EvidenceAction, EvidenceType
 from .models import Evidence
-from ...infrastructure.storage.file_store import file_store
+from infrastructure.storage.file_store import file_store
 
 log = structlog.get_logger()
 

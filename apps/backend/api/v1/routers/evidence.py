@@ -2,10 +2,10 @@ import uuid
 from fastapi import APIRouter, Depends, UploadFile, File, Form, status
 
 from sqlalchemy.ext.asyncio import AsyncSession
-from ....infrastructure.database.catalyst import get_db
-from ....core.responses import SuccessResponse
-from ....domain.evidence.schemas import EvidenceResponse, EvidenceType
-from ....domain.evidence.service import evidence_service
+from infrastructure.database.catalyst import get_db
+from core.responses import SuccessResponse
+from domain.evidence.schemas import EvidenceResponse, EvidenceType
+from domain.evidence.service import evidence_service
 
 router = APIRouter(prefix="/evidence", tags=["Evidence Management"])
 

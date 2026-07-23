@@ -6,14 +6,14 @@ from typing import AsyncGenerator
 import structlog
 
 from sqlalchemy.ext.asyncio import AsyncSession
-from ...core.config import get_settings
-from ...core.exceptions import NETRABaseException
+from core.config import get_settings
+from core.exceptions import NETRABaseException
 
 from .models import Conversation, Message
 from .repository import conversation_repo, message_repo
 from .schemas import ChatRequest, ChatStreamChunk, Citation
 from .prompts import get_chat_prompt
-from ...infrastructure.ai.rag.pipeline import rag_pipeline
+from infrastructure.ai.rag.pipeline import rag_pipeline
 
 # Optional fallback if LangChain/Gemini SDKs are not fully installed in local env
 try:

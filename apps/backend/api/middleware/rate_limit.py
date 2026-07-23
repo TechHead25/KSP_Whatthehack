@@ -7,11 +7,11 @@ from typing import Callable, Awaitable
 from fastapi import Request, Response
 from fastapi.responses import JSONResponse
 from starlette.middleware.base import BaseHTTPMiddleware
-from ...infrastructure.database.redis import redis_manager
+from infrastructure.database.redis import redis_manager
 
 log = structlog.get_logger()
 
-from ...core.security import decode_token
+from core.security import decode_token
 
 # Per API_SPEC.md §14 (Limits per minute)
 ROLE_LIMITS = {

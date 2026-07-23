@@ -42,6 +42,22 @@ export const ROLE_META: Record<Role, RoleMeta> = {
     jurisdictionScope: 'DISTRICT',
     mfaRequired: true,
   },
+  COMMISSIONER: {
+    label: 'Commissioner',
+    description: 'Strategic state-wide command access',
+    color: 'text-red-400',
+    badgeClass: 'bg-red-500/15 text-red-300 border-red-500/30',
+    jurisdictionScope: 'NATIONAL',
+    mfaRequired: true,
+  },
+  DYSP: {
+    label: 'DYSP',
+    description: 'District operations oversight',
+    color: 'text-sky-400',
+    badgeClass: 'bg-sky-500/15 text-sky-300 border-sky-500/30',
+    jurisdictionScope: 'DISTRICT',
+    mfaRequired: true,
+  },
   INVESTIGATION_OFFICER: {
     label: 'Investigation Officer',
     description: 'Station investigation management',
@@ -98,6 +114,19 @@ export const ROLE_PERMISSIONS: Record<Role, Permission[]> = {
     'VIEW_CRIMINAL_NETWORK', 'VIEW_HEATMAP', 'VIEW_ANALYTICS', 'GENERATE_REPORTS',
     'USE_AI_ASSISTANT', 'VIEW_AUDIT_LOGS', 'MANAGE_ALERTS', 'VIEW_EVIDENCE', 'MANAGE_PATROL',
   ],
+  COMMISSIONER: [
+    'READ_ALL_FIRS', 'READ_DISTRICT_FIRS', 'READ_STATION_FIRS', 'WRITE_FIRS',
+    'READ_ALL_SUSPECTS', 'READ_DISTRICT_SUSPECTS', 'READ_STATION_SUSPECTS', 'WRITE_SUSPECTS',
+    'VIEW_CRIMINAL_NETWORK', 'VIEW_HEATMAP', 'VIEW_ANALYTICS', 'GENERATE_REPORTS',
+    'USE_AI_ASSISTANT', 'MANAGE_OFFICERS', 'VIEW_AUDIT_LOGS', 'MANAGE_ALERTS',
+    'VIEW_EVIDENCE', 'MANAGE_PATROL',
+  ],
+  DYSP: [
+    'READ_DISTRICT_FIRS', 'READ_STATION_FIRS', 'WRITE_FIRS',
+    'READ_DISTRICT_SUSPECTS', 'READ_STATION_SUSPECTS', 'WRITE_SUSPECTS',
+    'VIEW_CRIMINAL_NETWORK', 'VIEW_HEATMAP', 'VIEW_ANALYTICS', 'GENERATE_REPORTS',
+    'USE_AI_ASSISTANT', 'VIEW_AUDIT_LOGS', 'MANAGE_ALERTS', 'VIEW_EVIDENCE', 'MANAGE_PATROL',
+  ],
   INVESTIGATION_OFFICER: [
     'READ_STATION_FIRS', 'WRITE_FIRS',
     'READ_STATION_SUSPECTS', 'WRITE_SUSPECTS',
@@ -144,7 +173,7 @@ export function getJurisdictionScope(role: Role): JurisdictionScope {
 }
 
 /** Roles requiring MFA per SECURITY.md §3.3 */
-export const MFA_REQUIRED_ROLES: Role[] = ['SUPER_ADMIN', 'STATE_ADMIN', 'DISTRICT_ADMIN', 'INVESTIGATION_OFFICER']
+export const MFA_REQUIRED_ROLES: Role[] = ['SUPER_ADMIN', 'STATE_ADMIN', 'DISTRICT_ADMIN', 'COMMISSIONER', 'DYSP', 'INVESTIGATION_OFFICER']
 
 /** Check if a role requires MFA */
 export function requiresMFA(role: Role): boolean {

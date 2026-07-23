@@ -3,10 +3,10 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import Dict, Any
 
-from ....infrastructure.database.catalyst import get_db
-from ....core.responses import SuccessResponse
-from ....domain.dashboard.schemas import OfficerDashboardResponse
-from ....domain.dashboard.service import dashboard_orchestrator
+from infrastructure.database.catalyst import get_db
+from core.responses import SuccessResponse
+from domain.dashboard.schemas import OfficerDashboardResponse
+from domain.dashboard.service import dashboard_orchestrator
 
 router = APIRouter(prefix="/dashboard", tags=["Dashboard Aggregation (BFF)"])
 

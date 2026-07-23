@@ -3,10 +3,10 @@ from typing import List, Dict, Any
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from ...core.repository import BaseRepository
+from core.repository import BaseRepository
 from .models import PatrolSchedule
 from .schemas import PatrolScheduleCreate, PatrolScheduleUpdate
-from ..shared.models import Officer
+from domain.shared.models import Officer
 
 class PatrolRepository(BaseRepository[PatrolSchedule, PatrolScheduleCreate, PatrolScheduleUpdate]):
     def __init__(self):

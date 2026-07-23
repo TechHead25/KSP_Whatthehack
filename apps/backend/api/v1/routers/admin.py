@@ -2,11 +2,11 @@ from fastapi import APIRouter, Depends
 from typing import List
 
 from sqlalchemy.ext.asyncio import AsyncSession
-from ....infrastructure.database.catalyst import get_db
-from ....core.responses import SuccessResponse
-from ....domain.admin.schemas import TelemetryResponse, ActiveSessionResponse, AuditLogResponse
-from ....domain.admin.service import admin_service
-from ..dependencies import require_role
+from infrastructure.database.catalyst import get_db
+from core.responses import SuccessResponse
+from domain.admin.schemas import TelemetryResponse, ActiveSessionResponse, AuditLogResponse
+from domain.admin.service import admin_service
+from api.v1.dependencies import require_role
 
 router = APIRouter(prefix="/admin", tags=["Enterprise Administration"])
 

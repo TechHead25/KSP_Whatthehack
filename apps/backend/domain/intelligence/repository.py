@@ -4,7 +4,7 @@ from sqlalchemy import select, desc
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
-from ...core.repository import BaseRepository
+from core.repository import BaseRepository
 from .models import Conversation, Message
 from .schemas import ConversationCreate, ConversationUpdate, MessageCreate
 

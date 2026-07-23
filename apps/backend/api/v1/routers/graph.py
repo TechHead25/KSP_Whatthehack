@@ -1,9 +1,9 @@
 from typing import List, Optional
 from fastapi import APIRouter, Depends, Query
-from ....core.responses import SuccessResponse
+from core.responses import SuccessResponse
 
-from ....domain.graph.schemas import GraphResponse, PathfindingResponse, CentralityResponse, CommunityResponse
-from ....domain.graph.service import graph_service
+from domain.graph.schemas import GraphResponse, PathfindingResponse, CentralityResponse, CommunityResponse
+from domain.graph.service import graph_service
 
 router = APIRouter(prefix="/graph", tags=["Graph Intelligence"])
 

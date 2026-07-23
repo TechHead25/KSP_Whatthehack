@@ -10,7 +10,7 @@ except ImportError:
     HAS_PGVECTOR = False
 
 from .embedder import embedder_service
-from ...database.catalyst import engine # The SQLAlchemy AsyncEngine
+from infrastructure.database.catalyst import engine # The SQLAlchemy AsyncEngine
 
 log = structlog.get_logger()
 

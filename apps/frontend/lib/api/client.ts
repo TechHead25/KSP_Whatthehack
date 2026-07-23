@@ -5,7 +5,21 @@
 import axios, { AxiosError, type InternalAxiosRequestConfig } from 'axios'
 import { useAuthStore } from '../stores/authStore'
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8000/api/v1'
+const getBaseUrl = (): string => {
+  if (process.env.NEXT_PUBLIC_API_URL) {
+    return process.env.NEXT_PUBLIC_API_URL
+  }
+  if (typeof window !== 'undefined') {
+    const host = window.location.hostname
+    if (host.includes('catalystappsail')) {
+      const domain = host.substring(host.indexOf('.'))
+      return `https://netra-api${domain}/api/v1`
+    }
+  }
+  return 'http://localhost:8000/api/v1'
+}
+
+const API_BASE = getBaseUrl()
 
 export const apiClient = axios.create({
   baseURL: API_BASE,

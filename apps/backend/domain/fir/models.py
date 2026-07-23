@@ -2,7 +2,7 @@ from sqlalchemy import Column, String, Boolean, ForeignKey, Integer, Numeric, Te
 from sqlalchemy.dialects.postgresql import JSONB, ARRAY
 from sqlalchemy.orm import relationship
 
-from ...core.models import Base, UUIDMixin, TimestampMixin
+from core.models import Base, UUIDMixin, TimestampMixin
 
 # Optional: Try to import pgvector, if missing use fallback
 try:

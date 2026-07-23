@@ -2,7 +2,7 @@ from sqlalchemy import Column, String, Boolean, ForeignKey, DateTime, Text
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import relationship
 
-from ...core.models import Base, UUIDMixin, TimestampMixin
+from core.models import Base, UUIDMixin, TimestampMixin
 
 class Evidence(Base, UUIDMixin, TimestampMixin):
     __tablename__ = "evidence"

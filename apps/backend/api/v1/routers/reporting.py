@@ -1,9 +1,9 @@
 from fastapi import APIRouter
 from typing import List
 
-from ....core.responses import SuccessResponse
-from ....domain.reporting.schemas import ReportRequest, ReportResponse, ReportType
-from ....domain.reporting.service import reporting_service
+from core.responses import SuccessResponse
+from domain.reporting.schemas import ReportRequest, ReportResponse, ReportType
+from domain.reporting.service import reporting_service
 
 router = APIRouter(prefix="/reports", tags=["Enterprise Reporting"])
 

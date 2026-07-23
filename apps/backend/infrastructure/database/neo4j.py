@@ -3,7 +3,7 @@
 # ============================================================
 import structlog
 from neo4j import AsyncGraphDatabase, AsyncDriver
-from ...core.config import get_settings
+from core.config import get_settings
 
 settings = get_settings()
 log = structlog.get_logger()

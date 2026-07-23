@@ -2,8 +2,8 @@ import uuid
 from typing import List
 
 from .schemas import CoverageAnalysis, OfficerAllocation, RecommendedRoute, Waypoint
-from ..shared.models import Officer
-from ...infrastructure.ml.hotspot import hotspot_predictor
+from domain.shared.models import Officer
+from infrastructure.ml.hotspot import hotspot_predictor
 
 class RecommendationEngine:
     """

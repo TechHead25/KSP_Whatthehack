@@ -3,13 +3,13 @@ from typing import List, Any
 from fastapi import APIRouter, Depends, Query, status
 
 from sqlalchemy.ext.asyncio import AsyncSession
-from ....infrastructure.database.catalyst import get_db
-from ....core.responses import SuccessResponse
-from ....domain.fir.schemas import (
+from infrastructure.database.catalyst import get_db
+from core.responses import SuccessResponse
+from domain.fir.schemas import (
     FIRCreate, FIRUpdate, FIRResponse, FIRDetailResponse, 
     FIRFilterParams, FIRStatusUpdate, EvidenceCreate, EvidenceResponse
 )
-from ....domain.fir.service import fir_service
+from domain.fir.service import fir_service
 
 router = APIRouter(prefix="/firs", tags=["FIR Management"])
 

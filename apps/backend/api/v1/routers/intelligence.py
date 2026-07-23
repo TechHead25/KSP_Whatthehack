@@ -4,12 +4,12 @@ from fastapi import APIRouter, Depends
 from fastapi.responses import StreamingResponse
 
 from sqlalchemy.ext.asyncio import AsyncSession
-from ....infrastructure.database.catalyst import get_db
-from ....core.responses import SuccessResponse
+from infrastructure.database.catalyst import get_db
+from core.responses import SuccessResponse
 
-from ....domain.intelligence.schemas import ChatRequest, ConversationResponse, MessageResponse
-from ....domain.intelligence.service import ai_service
-from ....domain.intelligence.repository import conversation_repo, message_repo
+from domain.intelligence.schemas import ChatRequest, ConversationResponse, MessageResponse
+from domain.intelligence.service import ai_service
+from domain.intelligence.repository import conversation_repo, message_repo
 
 router = APIRouter(prefix="/intelligence", tags=["AI Intelligence"])
 

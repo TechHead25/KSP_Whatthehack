@@ -2,10 +2,10 @@ import uuid
 from fastapi import APIRouter, Depends, Query
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from ....infrastructure.database.catalyst import get_db
-from ....core.responses import SuccessResponse
-from ....domain.patrol.schemas import CoverageAnalysis, PatrolScheduleCreate, PatrolScheduleResponse
-from ....domain.patrol.service import patrol_service
+from infrastructure.database.catalyst import get_db
+from core.responses import SuccessResponse
+from domain.patrol.schemas import CoverageAnalysis, PatrolScheduleCreate, PatrolScheduleResponse
+from domain.patrol.service import patrol_service
 
 router = APIRouter(prefix="/patrol", tags=["Patrol & Recommendation"])
 

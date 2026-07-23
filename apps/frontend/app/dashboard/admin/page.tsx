@@ -4,7 +4,7 @@ import { apiClient as api } from '@/lib/api/client'
 import { usePermissions } from '@/lib/hooks/usePermissions'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Activity, ActivityIcon, AlertCircle, Database, ShieldCheck, Users } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 interface TelemetryMetric {
   metric_name: string
@@ -53,13 +53,7 @@ export default function SuperAdminPortal() {
   const [auditLogs, setAuditLogs] = useState<AuditLog[]>([])
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    if (isSuperAdmin) {
-      fetchData()
-    }
-  }, [activeTab, isSuperAdmin])
-
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     setLoading(true)
     try {
       if (activeTab === 'telemetry') {
@@ -72,12 +66,18 @@ export default function SuperAdminPortal() {
         const { data } = await api.get<{ data: AuditLog[] }>('/admin/audit')
         setAuditLogs(data.data)
       }
-    } catch (e) {
-      console.error(e)
+    } catch {
+      // Telemetry error handled silently
     } finally {
       setLoading(false)
     }
-  }
+  }, [activeTab])
+
+  useEffect(() => {
+    if (isSuperAdmin) {
+      void fetchData()
+    }
+  }, [fetchData, isSuperAdmin])
 
   if (!isSuperAdmin) {
     return (

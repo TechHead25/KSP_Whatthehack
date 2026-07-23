@@ -86,7 +86,7 @@ export default function PredictionsPage() {
               </div>
               <h2 className="text-2xl font-black text-white mb-3 tracking-tight">Vehicle Theft Cluster: Koramangala</h2>
               <p className="text-text-secondary leading-relaxed mb-6 font-medium">
-                Based on recent FIR data, weather patterns, and historical trends, there is an <strong className="text-red-400 font-bold bg-red-500/10 px-1 rounded">89% probability</strong> of vehicle theft incidents in <span className="text-white">Koramangala 4th Block</span> between 02:00 AM and 04:00 AM tonight. Suspect profile matches known syndicate "Alpha-9".
+                Based on recent FIR data, weather patterns, and historical trends, there is an <strong className="text-red-400 font-bold bg-red-500/10 px-1 rounded">89% probability</strong> of vehicle theft incidents in <span className="text-white">Koramangala 4th Block</span> between 02:00 AM and 04:00 AM tonight. Suspect profile matches known syndicate &quot;Alpha-9&quot;.
               </p>
               <div className="flex gap-4">
                 <button

@@ -1,10 +1,10 @@
 from fastapi import APIRouter, BackgroundTasks, Query
 from typing import Dict, Any
 
-from ....core.responses import SuccessResponse
-from ....domain.prediction.schemas import RiskScoreResponse, HotspotResponse, AnomalyResponse, ForecastResponse
-from ....domain.prediction.service import prediction_service
-from ....domain.prediction.jobs import recalculate_all_risk_scores
+from core.responses import SuccessResponse
+from domain.prediction.schemas import RiskScoreResponse, HotspotResponse, AnomalyResponse, ForecastResponse
+from domain.prediction.service import prediction_service
+from domain.prediction.jobs import recalculate_all_risk_scores
 
 router = APIRouter(prefix="/prediction", tags=["AI Prediction & ML"])
 

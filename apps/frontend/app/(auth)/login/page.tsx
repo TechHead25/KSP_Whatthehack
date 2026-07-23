@@ -58,16 +58,12 @@ export default function LoginPage() {
       // On success, reset attempts
       setFailedAttempts(0)
       setShowCaptcha(false)
-    } catch (error: unknown) {
+    } catch {
       const newAttempts = failedAttempts + 1
       setFailedAttempts(newAttempts)
       if (newAttempts >= 3) {
         setShowCaptcha(true)
         setCaptchaVerified(false)
-      }
-
-      if (error instanceof Error) {
-        console.error(error.message)
       }
     }
   }

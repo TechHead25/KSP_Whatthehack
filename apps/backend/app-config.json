@@ -1,13 +1,12 @@
 {
   "name": "netra-api",
   "type": "app",
-  "stack": "python3.11",
+  "stack": "python_3_11",
+  "build_path": ".",
   "build": {
     "command": "pip install -r requirements.txt"
   },
-  "run": {
-    "command": "uvicorn main:app --host 0.0.0.0 --port $X_ZOHO_CATALYST_LISTEN_PORT"
-  },
+  "command": "python3 start.py",
   "env": {
     "PYTHONUNBUFFERED": "1",
     "ENVIRONMENT": "production"

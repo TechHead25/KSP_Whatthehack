@@ -2,7 +2,7 @@ from sqlalchemy import Column, String, Boolean, ForeignKey, Integer, Numeric, Te
 from sqlalchemy.dialects.postgresql import JSONB, ARRAY
 from sqlalchemy.orm import relationship
 
-from ...core.models import Base, UUIDMixin, TimestampMixin, AuditMixin
+from core.models import Base, UUIDMixin, TimestampMixin, AuditMixin
 
 class District(Base, UUIDMixin, TimestampMixin):
     __tablename__ = "districts"

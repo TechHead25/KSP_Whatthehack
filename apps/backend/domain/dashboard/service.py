@@ -6,9 +6,9 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from .schemas import OfficerDashboardResponse, DashboardWidgets, OverviewWidgetData, AlertWidget, ActivityItem
 # Real implementation would import these internal services
-# from ...domain.analytics.service import analytics_service
-# from ...domain.prediction.service import prediction_service
-# from ...domain.alerts.service import alert_dispatcher
+# from domain.analytics.service import analytics_service
+# from domain.prediction.service import prediction_service
+# from domain.alerts.service import alert_dispatcher
 
 log = structlog.get_logger()
 
