@@ -1,5 +1,6 @@
 {
   "name": "netra-api",
   "stack": "python_3_11",
-  "command": "python3 start.py"
+  "build_path": ".",
+  "command": "python start.py"
 }

@@ -1,5 +1,6 @@
 {
   "name": "netra-frontend",
   "stack": "node20",
+  "build_path": ".",
   "command": "node start.js"
 }
