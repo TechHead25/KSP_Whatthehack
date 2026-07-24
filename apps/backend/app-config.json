@@ -3,12 +3,14 @@
   "type": "app",
   "stack": "python_3_11",
   "build_path": ".",
+  "port": 8080,
   "build": {
     "command": "pip install -r requirements.txt"
   },
   "command": "python3 start.py",
   "env": {
     "PYTHONUNBUFFERED": "1",
-    "ENVIRONMENT": "production"
+    "ENVIRONMENT": "production",
+    "PORT": "8080"
   }
 }

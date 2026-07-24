@@ -32,7 +32,7 @@ if __name__ == "__main__":
     # 1. X_ZOHO_CATALYST_LISTEN_PORT (Catalyst AppSail)
     # 2. PORT (Standard PaaS fallback)
     # 3. 8000 (Default)
-    port_str = os.getenv("X_ZOHO_CATALYST_LISTEN_PORT") or os.getenv("PORT") or "8000"
+    port_str = os.getenv("X_ZOHO_CATALYST_LISTEN_PORT") or os.getenv("PORT") or "8080"
     port = int(port_str)
 
     # Verbose startup logging

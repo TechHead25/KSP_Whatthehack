@@ -2,7 +2,7 @@ const { createServer } = require('http');
 const parseUrl = require('url').parse;
 const next = require('next');
 
-const port = parseInt(process.env.X_ZOHO_CATALYST_LISTEN_PORT || process.env.PORT || '3000', 10);
+const port = parseInt(process.env.X_ZOHO_CATALYST_LISTEN_PORT || process.env.PORT || '8080', 10);
 const dev = false;
 const app = next({ dev, dir: __dirname });
 const handle = app.getRequestHandler();
