@@ -23,8 +23,8 @@
     "plugins": [{ "name": "next" }],
     "paths": {
       "@/*": ["./*"],
-      "@netra/types": ["../../packages/types/src"],
-      "@netra/config": ["../../packages/config/src"]
+      "@netra/types": ["./lib/types"],
+      "@netra/config": ["./lib/config"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

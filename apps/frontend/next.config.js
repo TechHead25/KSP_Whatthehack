@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  transpilePackages: ['@netra/types', '@netra/config'],
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: '**.catalyst.zoho.com' },
