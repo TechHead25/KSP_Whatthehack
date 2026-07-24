@@ -41,4 +41,5 @@ logs/
 uploads/*
 !uploads/.gitkeep
 *.db
+!apps/backend/netra_demo.db
 .catalystrc
