@@ -3,11 +3,14 @@
 # ============================================================
 import os
 import sys
+import site
+import glob
 
 print(f"[NETRA API] Python process started. PID={os.getpid()}", flush=True)
 print(f"[NETRA API] X_ZOHO_CATALYST_LISTEN_PORT={os.getenv('X_ZOHO_CATALYST_LISTEN_PORT')}", flush=True)
 print(f"[NETRA API] PORT={os.getenv('PORT')}", flush=True)
 
+# 1. Ensure root directory is top of sys.path for absolute imports
 cwd = os.path.dirname(os.path.abspath(__file__))
 if cwd not in sys.path:
     sys.path.insert(0, cwd)
@@ -29,26 +32,17 @@ from core.config import get_settings
 if __name__ == "__main__":
     settings = get_settings()
 
-    # Port resolution per specification:
-    # 1. X_ZOHO_CATALYST_LISTEN_PORT (Catalyst AppSail)
-    # 2. PORT (Standard PaaS fallback)
-    # 3. 8000 (Default)
-    port_str = os.getenv("X_ZOHO_CATALYST_LISTEN_PORT") or os.getenv("PORT") or "8080"
+    port_str = os.getenv("X_ZOHO_CATALYST_LISTEN_PORT") or os.getenv("PORT") or "8000"
     port = int(port_str)
 
-    # Verbose startup logging
-    print("=" * 60)
-    print("      NETRA AI — ZOHO CATALYST APPSAIL BACKEND")
-    print("=" * 60)
-    print(f"Python Version    : {sys.version.split()[0]} ({sys.executable})")
-    print(f"Working Directory : {os.getcwd()}")
-    print(f"Startup Command   : python3 start.py")
-    print(f"Target Port       : {port}")
-    print(f"Environment       : {settings.environment}")
-    print(f"App Version       : {settings.app_version}")
-    print(f"Database URL      : {settings.database_url.split('://')[0]}://***")
-    print(f"CORS Origins      : {settings.cors_origins}")
-    print("=" * 60)
-    print(f"[NETRA API] Starting uvicorn server on 0.0.0.0:{port}...")
+    print("=" * 60, flush=True)
+    print("      NETRA AI — ZOHO CATALYST APPSAIL BACKEND", flush=True)
+    print("=" * 60, flush=True)
+    print(f"Python Version    : {sys.version.split()[0]} ({sys.executable})", flush=True)
+    print(f"Working Directory : {os.getcwd()}", flush=True)
+    print(f"Target Port       : {port}", flush=True)
+    print(f"Environment       : {settings.environment}", flush=True)
+    print("=" * 60, flush=True)
+    print(f"[NETRA API] Starting uvicorn server on 0.0.0.0:{port}...", flush=True)
 
     uvicorn.run("main:app", host="0.0.0.0", port=port)
