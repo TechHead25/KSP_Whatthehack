@@ -2,5 +2,8 @@
   "name": "netra-frontend",
   "stack": "node20",
   "build_path": ".",
+  "build": {
+    "command": "npm install --production=false && npm run build"
+  },
   "command": "node start.js"
 }
