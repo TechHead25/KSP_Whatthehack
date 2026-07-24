@@ -3,10 +3,11 @@
 # ============================================================
 import os
 import sys
-import site
-import glob
 
-# 1. Ensure root directory is top of sys.path for absolute imports
+print(f"[NETRA API] Python process started. PID={os.getpid()}", flush=True)
+print(f"[NETRA API] X_ZOHO_CATALYST_LISTEN_PORT={os.getenv('X_ZOHO_CATALYST_LISTEN_PORT')}", flush=True)
+print(f"[NETRA API] PORT={os.getenv('PORT')}", flush=True)
+
 cwd = os.path.dirname(os.path.abspath(__file__))
 if cwd not in sys.path:
     sys.path.insert(0, cwd)

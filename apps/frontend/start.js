@@ -1,3 +1,7 @@
+console.log(`[NETRA FRONTEND] Node process started. PID=${process.pid}`);
+console.log(`[NETRA FRONTEND] X_ZOHO_CATALYST_LISTEN_PORT=${process.env.X_ZOHO_CATALYST_LISTEN_PORT}`);
+console.log(`[NETRA FRONTEND] PORT=${process.env.PORT}`);
+
 const { createServer } = require('http');
 const parseUrl = require('url').parse;
 const next = require('next');
