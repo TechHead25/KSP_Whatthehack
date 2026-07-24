@@ -44,13 +44,14 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     return () => document.removeEventListener('keydown', down)
   }, [])
 
-  if (!mounted) return null
+  // Handle auth redirect safely in effect
+  useEffect(() => {
+    if (mounted && !isAuthenticated) {
+      router.push('/login')
+    }
+  }, [mounted, isAuthenticated, router])
 
-  // If not authenticated, redirect (backup to middleware)
-  if (!isAuthenticated) {
-    router.push('/login')
-    return null
-  }
+  if (!mounted || !isAuthenticated) return null
 
   return (
     <div className="flex h-screen overflow-hidden bg-bg-base text-text-primary">

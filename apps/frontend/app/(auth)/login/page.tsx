@@ -11,6 +11,7 @@ import { z } from 'zod'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Eye, EyeOff, Shield, AlertCircle, Loader2, Lock, BadgeCheck, Network, Activity, Zap, ArrowRight } from 'lucide-react'
 import { useAuth } from '@/lib/hooks/useAuth'
+import { KSPLogo } from '@/components/KSPLogo'
 
 // ── Validation schema ─────────────────────────────────────────
 
@@ -101,10 +102,17 @@ export default function LoginPage() {
         {/* Content Top */}
         <div className="relative z-10">
           <div className="flex items-center gap-3 mb-12">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-600/30 to-bg-base border border-brand-500/30 flex items-center justify-center shadow-glow-sm">
-              <Zap className="w-5 h-5 text-brand-400" />
+            <div className="w-12 h-12 rounded-xl overflow-hidden border border-brand-500/40 shadow-glow-md">
+              <KSPLogo className="w-full h-full object-cover" />
             </div>
-            <span className="font-black text-2xl tracking-tight text-white">NETRA <span className="text-brand-400">AI</span></span>
+            <div>
+              <span className="font-black text-2xl tracking-tight text-white flex items-center gap-1.5">
+                NETRA <span className="text-brand-400">AI</span>
+              </span>
+              <span className="text-[10px] font-bold text-text-tertiary uppercase tracking-widest block -mt-1">
+                Karnataka State Police Official Command Portal
+              </span>
+            </div>
           </div>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}

@@ -196,25 +196,28 @@ class AuthService:
         await self.db.commit()
 
     async def _get_officer(self, badge_number: str) -> Officer:
+        from sqlalchemy.orm import selectinload
+        from sqlalchemy import func
         result = await self.db.execute(
-            select(Officer).where(Officer.badge_number == badge_number)
+            select(Officer)
+            .options(selectinload(Officer.station), selectinload(Officer.district))
+            .where(func.lower(Officer.badge_number) == badge_number.lower())
         )
         officer = result.scalars().first()
         if not officer:
             raise OfficerNotFoundException()
-        
-        # Load relationships
-        await self.db.refresh(officer, ["station", "district"])
         return officer
         
     async def _get_officer_by_id(self, officer_id: str) -> Officer:
+        from sqlalchemy.orm import selectinload
         result = await self.db.execute(
-            select(Officer).where(Officer.id == officer_id)
+            select(Officer)
+            .options(selectinload(Officer.station), selectinload(Officer.district))
+            .where(Officer.id == officer_id)
         )
         officer = result.scalars().first()
         if not officer:
             raise OfficerNotFoundException()
-        await self.db.refresh(officer, ["station", "district"])
         return officer
 
     def _build_officer_out(self, officer: Officer) -> OfficerOut:

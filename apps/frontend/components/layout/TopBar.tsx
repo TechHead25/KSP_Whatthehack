@@ -10,6 +10,7 @@ import { useAuthStore } from '@/lib/stores/authStore'
 import { RoleBadge } from '@/components/ui/RoleBadge'
 import { UserMenu } from '@/components/ui/UserMenu'
 import { NotificationBell } from '@/components/ui/NotificationBell'
+import { KSPLogo } from '@/components/KSPLogo'
 import type { Role } from '@netra/types'
 
 interface TopBarProps {
@@ -40,11 +41,16 @@ export function TopBar({ onCommandPalette, onMobileSidebar }: TopBarProps) {
           <Menu className="w-5 h-5" />
         </button>
 
-        <div className="hidden sm:flex items-center gap-2 bg-bg-surface border border-border-strong px-3 py-1.5 rounded-full shadow-inner">
-          <div className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)] animate-pulse" />
-          <span className="text-[10px] font-bold text-white uppercase tracking-[0.15em]">
-            Secure · Classified
-          </span>
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 rounded-lg overflow-hidden border border-brand-500/40 shadow-glow-sm">
+            <KSPLogo className="w-full h-full object-cover" />
+          </div>
+          <div className="hidden sm:flex items-center gap-2 bg-bg-surface border border-border-strong px-3 py-1.5 rounded-full shadow-inner">
+            <div className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)] animate-pulse" />
+            <span className="text-[10px] font-bold text-white uppercase tracking-[0.15em]">
+              Karnataka State Police · Secure Command
+            </span>
+          </div>
         </div>
 
       </div>

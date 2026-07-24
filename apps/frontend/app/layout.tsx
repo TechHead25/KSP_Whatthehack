@@ -7,6 +7,7 @@ import { Inter, IBM_Plex_Sans, IBM_Plex_Mono } from 'next/font/google'
 import { Toaster } from 'sonner'
 import { AuthGuard } from '@/components/auth/AuthGuard'
 import { QueryProvider } from '@/components/providers/QueryProvider'
+import { RealtimeSyncListener } from '@/components/RealtimeSyncListener'
 import './globals.css'
 
 const inter = Inter({
@@ -57,6 +58,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="font-sans antialiased bg-bg-base text-text-primary">
         <QueryProvider>
           <AuthGuard>{children}</AuthGuard>
+          <RealtimeSyncListener />
         </QueryProvider>
 
         {/* Toast notification system */}

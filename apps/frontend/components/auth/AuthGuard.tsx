@@ -63,13 +63,20 @@ export function AuthGuard({ children }: AuthGuardProps) {
       }
 
       try {
-        await authApi.refresh()
+        await authApi.getMe()
       } catch {
-        handleRefreshLogout()
-        if (!isUnmounted) {
-          router.replace(`/login?redirect=${encodeURIComponent(pathname)}`)
+        try {
+          const res = await authApi.refresh()
+          if (res.access_token) {
+            useAuthStore.getState().setAccessToken(res.access_token)
+          }
+        } catch {
+          handleRefreshLogout()
+          if (!isUnmounted) {
+            router.replace(`/login?redirect=${encodeURIComponent(pathname)}`)
+          }
+          return
         }
-        return
       }
 
       if (!isUnmounted) {
@@ -79,11 +86,8 @@ export function AuthGuard({ children }: AuthGuardProps) {
 
     void validateSession()
 
-    window.addEventListener('beforeunload', handleRefreshLogout)
-
     return () => {
       isUnmounted = true
-      window.removeEventListener('beforeunload', handleRefreshLogout)
     }
   }, [accessToken, isAuthenticated, officer, pathname, router])
 

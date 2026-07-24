@@ -79,7 +79,8 @@ export function isValidSessionCookie(value: string | null | undefined): boolean 
     return false
   }
 
-  const [state, issuedAt] = value.split(':')
+  const raw = decodeURIComponent(value)
+  const [state, issuedAt] = raw.split(':')
   if (state !== 'active' || !issuedAt) {
     return false
   }

@@ -13,13 +13,14 @@ import {
   FileText, Users, Search, GitCommitHorizontal,
   GitBranch, Map, BarChart3, Navigation,
   ClipboardList, Settings2, Shield, ChevronLeft,
-  ChevronRight, Zap,
+  ChevronRight,
 } from 'lucide-react'
 import { NAV_CONFIG } from '@netra/config'
 import type { NavItem, NavGroup } from '@netra/types'
 import { useAuthStore } from '@/lib/stores/authStore'
 import { usePermissions } from '@/lib/hooks/usePermissions'
 import { cn } from '@/lib/utils/cn'
+import { KSPLogo } from '@/components/KSPLogo'
 
 // ── Icon map ──────────────────────────────────────────────────
 
@@ -161,9 +162,8 @@ export function Sidebar() {
         'flex items-center h-16 border-b border-border-strong flex-shrink-0 bg-bg-surface/90 backdrop-blur-md',
         collapsed ? 'justify-center px-2' : 'px-5 gap-3'
       )}>
-        <div className="flex items-center justify-center w-8 h-8 rounded-lg
-                        bg-gradient-to-br from-brand-600/30 to-bg-base border border-brand-500/30 flex-shrink-0 shadow-glow-sm">
-          <Zap className="w-4 h-4 text-brand-400" strokeWidth={2.5} />
+        <div className="w-8 h-8 rounded-lg border border-brand-500/40 overflow-hidden flex-shrink-0 shadow-glow-sm">
+          <KSPLogo className="w-full h-full object-cover" />
         </div>
 
         <AnimatePresence>

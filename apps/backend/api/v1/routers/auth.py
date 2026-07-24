@@ -17,9 +17,11 @@ from domain.auth.schemas import (
 )
 from domain.auth.service import AuthService
 
+from core.config import get_settings
 from sqlalchemy.ext.asyncio import AsyncSession
 from infrastructure.database.catalyst import get_db
 
+settings = get_settings()
 router = APIRouter(prefix="/auth", tags=["Authentication"])
 
 
@@ -62,8 +64,8 @@ async def login(
         key="refresh_token",
         value=result.tokens.refresh_token if result.tokens else "",
         httponly=True,
-        secure=True,
-        samesite="strict",
+        secure=settings.environment == "production",
+        samesite="lax",
         max_age=24 * 60 * 60,
     )
 
@@ -89,8 +91,8 @@ async def verify_mfa(
         key="refresh_token",
         value=result.tokens.refresh_token if result.tokens else "",
         httponly=True,
-        secure=True,
-        samesite="strict",
+        secure=settings.environment == "production",
+        samesite="lax",
         max_age=24 * 60 * 60,
     )
 
@@ -119,8 +121,8 @@ async def refresh_token(
         key="refresh_token",
         value=tokens.refresh_token,
         httponly=True,
-        secure=True,
-        samesite="strict",
+        secure=settings.environment == "production",
+        samesite="lax",
         max_age=24 * 60 * 60,
     )
 

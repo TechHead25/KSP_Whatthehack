@@ -3,6 +3,7 @@ import axios from 'axios'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, FileText, Loader2, ShieldAlert } from 'lucide-react'
 import { createFIR, FIRCreatePayload } from '@/lib/api/firApi'
+import { useSyncStore } from '@/lib/stores/syncStore'
 
 interface Props {
   isOpen: boolean
@@ -36,6 +37,14 @@ export function RegisterFIRModal({ isOpen, onClose, onSuccess }: Props) {
     
     try {
       await createFIR(formData)
+      
+      // Broadcast real-time event across officer sessions
+      useSyncStore.getState().addEvent({
+        type: 'FIR_CREATED',
+        title: `📄 New FIR Registered: ${formData.fir_number}`,
+        message: `${formData.crime_type} case registered (${formData.priority} Priority). Description: ${formData.description.slice(0, 60)}...`
+      })
+
       onSuccess()
       onClose()
     } catch (err: unknown) {
