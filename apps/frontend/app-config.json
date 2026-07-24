@@ -1,15 +1,5 @@
 {
   "name": "netra-frontend",
-  "type": "app",
   "stack": "node20",
-  "build_path": ".",
-  "port": 8080,
-  "build": {
-    "command": "npm install --production=false && npm run build"
-  },
-  "command": "node start.js",
-  "env": {
-    "NODE_ENV": "production",
-    "PORT": "8080"
-  }
+  "command": "node start.js"
 }
