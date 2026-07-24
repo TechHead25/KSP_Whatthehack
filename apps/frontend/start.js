@@ -1,21 +1,23 @@
-const { spawn } = require('child_process');
-const path = require('path');
+const { createServer } = require('http');
+const parseUrl = require('url').parse;
+const next = require('next');
 
-const port = process.env.X_ZOHO_CATALYST_LISTEN_PORT || process.env.PORT || 3000;
-console.log(`[NETRA FRONTEND] Starting Next.js server on 0.0.0.0:${port}...`);
+const port = parseInt(process.env.X_ZOHO_CATALYST_LISTEN_PORT || process.env.PORT || '3000', 10);
+const dev = false;
+const app = next({ dev, dir: __dirname });
+const handle = app.getRequestHandler();
 
-let nextBin;
-try {
-  nextBin = require.resolve('next/dist/bin/next');
-} catch (e) {
-  nextBin = path.join(__dirname, 'node_modules', 'next', 'dist', 'bin', 'next');
-}
+console.log(`[NETRA FRONTEND] Initializing Next.js production server on 0.0.0.0:${port}...`);
 
-const nextStart = spawn(process.execPath, [nextBin, 'start', '-H', '0.0.0.0', '-p', port.toString()], {
-  stdio: 'inherit',
-  cwd: __dirname
-});
-
-nextStart.on('exit', (code) => {
-  process.exit(code || 0);
+app.prepare().then(() => {
+  createServer((req, res) => {
+    const parsedUrl = parseUrl(req.url, true);
+    handle(req, res, parsedUrl);
+  }).listen(port, '0.0.0.0', (err) => {
+    if (err) throw err;
+    console.log(`[NETRA FRONTEND] Server listening on http://0.0.0.0:${port}`);
+  });
+}).catch((err) => {
+  console.error('[NETRA FRONTEND] Fatal error starting server:', err);
+  process.exit(1);
 });
