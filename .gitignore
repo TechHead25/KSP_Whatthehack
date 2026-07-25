@@ -18,7 +18,8 @@ __pycache__/
 *.pyo
 *.pyd
 .venv/
-venv/
+*.so
+!apps/backend/lib/**/*.so
 env/
 
 # Environment files
