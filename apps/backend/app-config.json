@@ -2,8 +2,5 @@
   "name": "netra-api",
   "stack": "python_3_11",
   "build_path": ".",
-  "build": {
-    "command": "pip install -r requirements.txt"
-  },
   "command": "python start.py"
 }
