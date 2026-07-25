@@ -8,7 +8,11 @@ import uuid
 from datetime import datetime, timedelta, timezone
 from typing import Any
 
-from jose import JWTError, jwt
+try:
+    import jwt
+    from jwt.exceptions import PyJWTError as JWTError
+except ImportError:
+    from jose import JWTError, jwt
 
 from .config import get_settings
 
