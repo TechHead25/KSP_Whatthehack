@@ -2,5 +2,5 @@
   "name": "netra-api",
   "stack": "python_3_11",
   "build_path": ".",
-  "command": "sh start.sh"
+  "command": "python -m uvicorn main:app --host 0.0.0.0 --port $X_ZOHO_CATALYST_LISTEN_PORT"
 }

@@ -5,6 +5,34 @@ from contextlib import asynccontextmanager
 from datetime import datetime, timezone
 import os
 
+import sys
+
+print("=" * 60, flush=True)
+print("      NETRA AI — ZOHO CATALYST APPSAIL BACKEND", flush=True)
+print("=" * 60, flush=True)
+
+print("\n[DIAGNOSTICS] Current Working Directory:", os.getcwd(), flush=True)
+print("\n[DIAGNOSTICS] Directory Listing:", os.listdir('.'), flush=True)
+
+print("\n[DIAGNOSTICS] Recursive file tree:", flush=True)
+for root, dirs, files in os.walk('.'):
+    for name in files:
+        print(os.path.join(root, name))
+        
+print("\n[DIAGNOSTICS] Python executable:", sys.executable, flush=True)
+print("\n[DIAGNOSTICS] Python version:", sys.version, flush=True)
+
+print("\n[DIAGNOSTICS] Environment variables:", flush=True)
+for k, v in os.environ.items():
+    print(f"{k}={v}")
+    
+print("\n[DIAGNOSTICS] sys.path:", sys.path, flush=True)
+
+print("\n[DIAGNOSTICS] Location of main.py:", os.path.abspath(__file__), flush=True)
+
+print("\n[DIAGNOSTICS] Current command:", sys.argv, flush=True)
+print("=" * 60, flush=True)
+
 import structlog
 from fastapi import FastAPI, Request, Depends
 from fastapi.middleware.cors import CORSMiddleware
