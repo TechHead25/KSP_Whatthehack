@@ -2,5 +2,5 @@
   "name": "netra-api",
   "stack": "python_3_11",
   "build_path": ".",
-  "command": "sh -c 'pwd && ls -la && python start.py'"
+  "command": "sh -c 'python -m http.server ${X_ZOHO_CATALYST_LISTEN_PORT:-8080}'"
 }
