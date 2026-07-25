@@ -2,5 +2,5 @@
   "name": "netra-api",
   "stack": "python_3_11",
   "build_path": ".",
-  "command": "python start.py"
+  "command": "sh -c 'pwd && ls -la && python start.py'"
 }
