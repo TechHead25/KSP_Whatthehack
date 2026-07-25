@@ -1,27 +1,8 @@
 #!/bin/sh
-echo "="
-echo "      NETRA AI — ZOHO CATALYST APPSAIL BACKEND"
-echo "="
-echo "[DIAGNOSTICS] Current Working Directory:"
-pwd
-echo "[DIAGNOSTICS] Directory Listing:"
-ls -la
-echo "[DIAGNOSTICS] Recursive file tree:"
-find . -type f
-echo "[DIAGNOSTICS] Python executable:"
-which python || which python3
-echo "[DIAGNOSTICS] Python version:"
-python --version || python3 --version
-echo "[DIAGNOSTICS] Environment variables:"
-env
-echo "[DIAGNOSTICS] sys.path:"
-python -c "import sys; print(sys.path)" || python3 -c "import sys; print(sys.path)"
-echo "[DIAGNOSTICS] Location of start.py:"
-find $(pwd) -name start.py
-echo "[DIAGNOSTICS] Location of main.py:"
-find $(pwd) -name main.py
-echo "[DIAGNOSTICS] Current command:"
-cat app-config.json
+echo "NETRA AI - Starting backend..."
+echo "Setting up Python dependencies in /tmp/deps..."
+export PYTHONPATH=/tmp/deps:$PYTHONPATH
+python3 -m pip install -r requirements.txt -t /tmp/deps --disable-pip-version-check --no-cache-dir
 
-echo "Starting application..."
-python start.py || python3 start.py
+echo "Dependencies installed. Starting Uvicorn..."
+python3 -m uvicorn main:app --host 0.0.0.0 --port $X_ZOHO_CATALYST_LISTEN_PORT

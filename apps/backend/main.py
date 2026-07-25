@@ -105,7 +105,7 @@ app = FastAPI(
 )
 
 # ── Static Files ─────────────────────────────────────────────
-uploads_dir = os.path.join(os.getcwd(), "uploads")
+uploads_dir = "/tmp/uploads"
 os.makedirs(uploads_dir, exist_ok=True)
 app.mount("/static/uploads", StaticFiles(directory=uploads_dir), name="uploads")
 
